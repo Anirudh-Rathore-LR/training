@@ -54,12 +54,21 @@ a {
 
 .input {
   padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    width: 100%;
-    box-sizing: border-box
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #008ECF;
+  font-size: 14px;
+  width: 100%;
+  background-color: #F0FAFF; /* Light blue background */
+  box-sizing: border-box;
+  color: #000;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: #006B99; /* Darker shade for focus */
+  box-shadow: 0 0 4px rgba(0, 142, 207, 0.4);
 }
 
 .button {
@@ -84,6 +93,7 @@ a {
 .profile-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   min-height: 100vh;
   background-color: #f1f5f9;

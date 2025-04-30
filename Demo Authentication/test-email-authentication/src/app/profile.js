@@ -8,6 +8,7 @@ export default function Profile(email) {
   const [user,setUser] = useState({FirstName:'',LastName:'',Gender:'',PhoneId:''});
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
+  myHeaders.append("Authorization", "Bearer "+localStorage.getItem('token'))
   
   const requestOptions = {
     method: "GET",
@@ -16,7 +17,7 @@ export default function Profile(email) {
   };
   
   useEffect(() => {
-  fetch(`https://api.loginradius.com/identity/v2/manage/account?apikey=85a8818a-2dd4-4d72-82de-dd7e53cf56a4&apisecret=065f7086-7d58-419a-846e-4d7d5fc3775f&email=${email.email}`, requestOptions)
+  fetch(`https://api.loginradius.com/identity/v2/auth/account?apikey=976ccf2e-ed66-41ed-a032-b9223f7dda91`, requestOptions)
     .then((response) => response.text())
     .then((result) => {
       const user = JSON.parse(result);
@@ -31,7 +32,7 @@ export default function Profile(email) {
         isFetching ? <div>Loading Data...</div> : 
         <div style={{overflow:'hidden'
         }}>
-          <h3 style={{marginLeft:'150px',marginTop:'50px'}}>Hi {user.FirstName} please find your info below</h3>
+          <h3 style={{marginLeft:'20px',marginTop:'50px'}}>Hi {user.FirstName} please find your info below</h3>
         <div className="profile-container" style={{overflow: 'hidden'
         }}>
           <div className="profile-card">
@@ -39,6 +40,10 @@ export default function Profile(email) {
             <p className="profile-email">Email : {user.Email[0].Value}</p>
             <p className="profile-location">Gender : {user.Gender}</p>
           </div>
+          <button className="button" style={{margin:'10px'}}  onClick={() => {
+            localStorage.removeItem('token');
+            window.location.reload();
+          }}>Logout</button>
         </div>
         </div>
       );
